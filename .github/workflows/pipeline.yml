@@ -1,0 +1,36 @@
+name: PWA web juego
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validar HTML
+        uses: cygnetdigital/html5validator-action@v1
+        with:
+          root: './'
+
+      - name: Búsqueda de links rotos
+        uses: JustinBeckwith/linkinator-action@v1
+        with:
+          paths: 'index.html'
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+
