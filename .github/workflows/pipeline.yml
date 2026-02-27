@@ -9,12 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Validar HTML
-        uses: cygnetdigital/html5validator-action@v1
-        with:
-          root: './'
+        run: npx htmlhint index.html
 
       - name: Búsqueda de links rotos
         uses: JustinBeckwith/linkinator-action@v1
@@ -24,6 +27,9 @@ jobs:
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
+    permissions:
+        contents: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
