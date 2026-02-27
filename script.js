@@ -1,3 +1,12 @@
+//Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./serviceworker.js')
+      .then(reg => console.log('Service Worker registrado', reg))
+      .catch(err => console.error('Error SW', err));
+  });
+}
+
 // Animación scroll
 const sections = document.querySelectorAll('.section');
 
