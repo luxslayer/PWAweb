@@ -1,12 +1,12 @@
 const CACHE_NAME = 'pwa-juego-v1';
 const FILES_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/main.js',
-  '/manifest.json',
-  '/icons/ABpoint192.png',
-  '/icons/ABpoint512.png'
+  './',
+  './index.html',
+  './style.css',
+  './main.js',
+  './manifest.json',
+  './icons/ABpoint192.png',
+  './icons/ABpoint512.png'
 ];
 
 // Instalación
