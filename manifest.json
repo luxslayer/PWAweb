@@ -2,7 +2,7 @@
   "name": "PWA Web Juego",
   "short_name": "PWA Juego",
   "description": "AB juego",
-  "start_url": "./index.html",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#0d47a1",
