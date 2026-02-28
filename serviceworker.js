@@ -5,8 +5,8 @@ const FILES_TO_CACHE = [
   '/style.css',
   '/main.js',
   '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png'
+  '/icons/ABpoint192.png',
+  '/icons/ABpoint512.png'
 ];
 
 // Instalación
