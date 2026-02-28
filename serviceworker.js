@@ -1,42 +1,45 @@
-const CACHE_NAME = 'pwa-juego-v1';
+const CACHE_NAME = 'pwaweb-v2';
+
 const FILES_TO_CACHE = [
-  './',
   './index.html',
   './style.css',
-  './main.js',
+  './script.js',
   './manifest.json',
   './icons/ABpoint192.png',
   './icons/ABpoint512.png'
 ];
 
-// Instalación
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(FILES_TO_CACHE);
+    caches.open(CACHE_NAME).then(async cache => {
+      for (const file of FILES_TO_CACHE) {
+        try {
+          await cache.add(file);
+          console.log('Cacheado:', file);
+        } catch (err) {
+          console.warn('NO se pudo cachear:', file, err);
+        }
+      }
     })
   );
   self.skipWaiting();
 });
 
-// Activación
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys.filter(key => key !== CACHE_NAME)
-            .map(key => caches.delete(key))
+        keys.filter(k => k !== CACHE_NAME)
+            .map(k => caches.delete(k))
       )
     )
   );
   self.clients.claim();
 });
 
-// Fetch (offline-first)
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
+    caches.match(event.request)
+      .then(res => res || fetch(event.request))
   );
 });
